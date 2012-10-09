@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Installation file for the Google Tag Manager module.
+ */
+function gtm_install() {
+  $result = db_query('SELECT * FROM {role} ORDER BY name');
+
+  while ($role = db_fetch_object($result)) {
+    $role_varname = $string = str_replace(" ", "_", $role->name);
+    $gtm_role = "gtm_track_{$role_varname}";
+
+    //check if variable is not already set from a previous install
+    if (strpos(variable_get($gtm_role, 'new'), 'new') !== FALSE) {
+      variable_set($gtm_role, TRUE);
+      drupal_set_message(t('Role %rolename u can now tracking with Google Tag Manager', array('%rolename' => $role->name)));
+    }
+  }
+}
+
+function gtm_uninstall() {
+  variable_del('gtm');
+}
