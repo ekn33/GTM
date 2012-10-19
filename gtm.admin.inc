@@ -17,10 +17,10 @@ function gtm_admin_settings_form(&$form_state) {
     '#size' => 20,
     '#rows' => 7,
     '#required' => TRUE,
-    '#description' => t('If you do not already have a Google Tag Manager Account, create here one: !link', array('!link' => l('https://www.google.com/tagmanager', 'https://www.google.com/tagmanager'))),
+    '#description' => t('If you do not already have a Google Tag Manager Account, create here one: !link', array('!link' => l('https://www.google.com/tagmanager','https://www.google.com/tagmanager'))),
   );
 
-  // Render the role overview.
+    // Render the role overview.
   $result = db_query('SELECT * FROM {role} ORDER BY name');
 
   $form['roles'] = array(
@@ -31,7 +31,7 @@ function gtm_admin_settings_form(&$form_state) {
   );
 
   while ($role = db_fetch_object($result)) {
-    // can't use empty spaces in varname
+     // can't use empty spaces in varname
     $role_varname = $string = str_replace(' ', '_', $role->name);
     $form['roles']["gtm_track_{$role_varname}"] = array(
       '#type' => 'checkbox',
