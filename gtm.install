@@ -5,7 +5,7 @@
  */
 
 function gtm_install() {
-  $result = db_query('SELECT * FROM {role} ORDER BY name');
+  $result = user_roles(TRUE);
 
   while ($role = db_fetch_object($result)) {
     $role_varname = $string = str_replace(" ", "_", $role->name);
